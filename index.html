@@ -1,0 +1,506 @@
+<meta charset="utf-8">
+<title>London Vistas — Week of 17 July 2026</title>
+<style>
+  :root{
+    --bg:#EFF0EC; --surface:#FBFBF9; --surface-2:#F4F5F1;
+    --ink:#1A1F27; --ink-soft:#586071; --ink-faint:#8A909C;
+    --line:#DEDFD8; --line-soft:#E9EAE4;
+    --accent:#9C6B25; --accent-2:#B98A3E; --accent-wash:#F1E7D6;
+    --verd:#2C6B66; --verd-wash:#E0EBE9;
+    --flag:#8A6D2E; --flag-wash:#F1EAD8;
+    --shadow:0 1px 2px rgba(26,31,39,.04),0 8px 24px rgba(26,31,39,.05);
+    --serif:"Iowan Old Style","Palatino Linotype",Palatino,"Book Antiqua",Georgia,serif;
+    --sans:system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
+    --mono:ui-monospace,"Cascadia Code","Segoe UI Mono",Menlo,Consolas,monospace;
+  }
+  @media (prefers-color-scheme:dark){
+    :root{
+      --bg:#111419; --surface:#181C23; --surface-2:#1E232B;
+      --ink:#ECEAE2; --ink-soft:#9AA1AE; --ink-faint:#6E7583;
+      --line:#2A2F39; --line-soft:#242932;
+      --accent:#D6A45C; --accent-2:#E4BC7E; --accent-wash:#2A2418;
+      --verd:#5FAAA3; --verd-wash:#16221F;
+      --flag:#C6A868; --flag-wash:#221D12;
+      --shadow:0 1px 2px rgba(0,0,0,.25),0 10px 30px rgba(0,0,0,.28);
+    }
+  }
+  :root[data-theme="dark"]{
+    --bg:#111419; --surface:#181C23; --surface-2:#1E232B;
+    --ink:#ECEAE2; --ink-soft:#9AA1AE; --ink-faint:#6E7583;
+    --line:#2A2F39; --line-soft:#242932;
+    --accent:#D6A45C; --accent-2:#E4BC7E; --accent-wash:#2A2418;
+    --verd:#5FAAA3; --verd-wash:#16221F;
+    --flag:#C6A868; --flag-wash:#221D12;
+    --shadow:0 1px 2px rgba(0,0,0,.25),0 10px 30px rgba(0,0,0,.28);
+  }
+  :root[data-theme="light"]{
+    --bg:#EFF0EC; --surface:#FBFBF9; --surface-2:#F4F5F1;
+    --ink:#1A1F27; --ink-soft:#586071; --ink-faint:#8A909C;
+    --line:#DEDFD8; --line-soft:#E9EAE4;
+    --accent:#9C6B25; --accent-2:#B98A3E; --accent-wash:#F1E7D6;
+    --verd:#2C6B66; --verd-wash:#E0EBE9;
+    --flag:#8A6D2E; --flag-wash:#F1EAD8;
+    --shadow:0 1px 2px rgba(26,31,39,.04),0 8px 24px rgba(26,31,39,.05);
+  }
+  *{box-sizing:border-box}
+  html{-webkit-text-size-adjust:100%}
+  body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--sans);
+    font-size:16px;line-height:1.5;-webkit-font-smoothing:antialiased}
+  .wrap{max-width:1080px;margin:0 auto;padding:0 24px}
+
+  /* Masthead */
+  header{padding:40px 0 22px;border-bottom:1px solid var(--line)}
+  .brandrow{display:flex;align-items:baseline;justify-content:space-between;gap:16px;flex-wrap:wrap}
+  .brand{font-family:var(--serif);font-weight:600;letter-spacing:.14em;text-transform:uppercase;
+    font-size:clamp(22px,3.6vw,32px);margin:0;line-height:1}
+  .brand .amp{color:var(--accent)}
+  .kicker{font-family:var(--mono);font-size:12px;letter-spacing:.08em;text-transform:uppercase;
+    color:var(--ink-soft)}
+  .lede{font-family:var(--serif);font-size:clamp(16px,2.2vw,20px);color:var(--ink-soft);
+    max-width:62ch;margin:16px 0 0;line-height:1.45;text-wrap:balance}
+  .lede b{color:var(--ink);font-weight:600}
+
+  /* Controls */
+  .controls{position:sticky;top:0;z-index:20;background:color-mix(in srgb,var(--bg) 88%,transparent);
+    backdrop-filter:blur(10px);border-bottom:1px solid var(--line);padding:12px 0;margin-bottom:8px}
+  .controls .wrap{display:flex;flex-direction:column;gap:12px}
+  .chiprow{display:flex;flex-wrap:wrap;gap:7px;align-items:center}
+  .chip{font-family:var(--mono);font-size:12px;letter-spacing:.04em;text-transform:uppercase;
+    padding:6px 12px;border:1px solid var(--line);border-radius:999px;background:var(--surface);
+    color:var(--ink-soft);cursor:pointer;transition:.15s}
+  .chip:hover{border-color:var(--accent-2);color:var(--ink)}
+  .chip[aria-pressed="true"]{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+  .toolrow{display:flex;flex-wrap:wrap;gap:18px 26px;align-items:center;justify-content:space-between}
+  .seg{display:inline-flex;border:1px solid var(--line);border-radius:8px;overflow:hidden}
+  .seg button{font-family:var(--mono);font-size:12px;letter-spacing:.04em;text-transform:uppercase;
+    padding:7px 14px;background:var(--surface);color:var(--ink-soft);border:0;cursor:pointer;transition:.15s}
+  .seg button+button{border-left:1px solid var(--line)}
+  .seg button[aria-pressed="true"]{background:var(--accent);color:#fff}
+  :root[data-theme="dark"] .seg button[aria-pressed="true"]{color:#161a12}
+  @media (prefers-color-scheme:dark){.seg button[aria-pressed="true"]{color:#161a12}}
+  .weight{display:flex;align-items:center;gap:12px;min-width:min(340px,100%);flex:1}
+  .weight label{font-family:var(--mono);font-size:11px;letter-spacing:.05em;text-transform:uppercase;
+    color:var(--ink-faint);white-space:nowrap}
+  .weight .val{color:var(--ink);font-weight:600}
+  input[type=range]{-webkit-appearance:none;appearance:none;height:4px;border-radius:2px;flex:1;
+    background:linear-gradient(90deg,var(--verd),var(--accent));cursor:pointer}
+  input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:18px;height:18px;border-radius:50%;
+    background:var(--surface);border:2px solid var(--accent);box-shadow:var(--shadow);cursor:pointer}
+  input[type=range]::-moz-range-thumb{width:18px;height:18px;border-radius:50%;
+    background:var(--surface);border:2px solid var(--accent);cursor:pointer}
+  input[type=range]:focus-visible{outline:2px solid var(--accent);outline-offset:4px}
+
+  /* Section labels */
+  .seclabel{font-family:var(--mono);font-size:12px;letter-spacing:.12em;text-transform:uppercase;
+    color:var(--ink-faint);margin:30px 0 14px;display:flex;align-items:center;gap:12px}
+  .seclabel::after{content:"";flex:1;height:1px;background:var(--line)}
+  .monthdiv{font-family:var(--serif);font-size:15px;letter-spacing:.02em;color:var(--accent);
+    text-transform:uppercase;font-weight:600;margin:26px 0 12px;padding-bottom:6px;border-bottom:1px solid var(--line)}
+
+  /* Gems strip */
+  .gems{margin:22px 0 6px}
+  .gemscroll{display:flex;gap:14px;overflow-x:auto;padding:4px 4px 14px;scroll-snap-type:x mandatory}
+  .gemscroll::-webkit-scrollbar{height:8px}
+  .gemscroll::-webkit-scrollbar-thumb{background:var(--line);border-radius:8px}
+  .gem{scroll-snap-align:start;flex:0 0 260px;background:var(--surface);border:1px solid var(--line);
+    border-radius:12px;padding:15px 16px;box-shadow:var(--shadow);position:relative}
+  .gem .gscore{font-family:var(--mono);font-size:22px;font-weight:600;color:var(--verd);font-variant-numeric:tabular-nums}
+  .gem h4{font-family:var(--serif);font-size:16px;margin:6px 0 4px;line-height:1.25;text-wrap:balance}
+  .gem .meta{font-size:12.5px;color:var(--ink-soft)}
+  .gem .why{font-size:12.5px;color:var(--ink-soft);margin-top:8px;line-height:1.4}
+
+  /* Cards */
+  .grid{display:flex;flex-direction:column;gap:14px}
+  .card{position:relative;background:var(--surface);border:1px solid var(--line);border-radius:14px;box-shadow:var(--shadow);
+    padding:18px 20px;display:grid;grid-template-columns:78px 1fr;gap:20px;transition:transform .16s,box-shadow .16s;
+    opacity:0;transform:translateY(8px);animation:rise .5s ease forwards}
+  @keyframes rise{to{opacity:1;transform:none}}
+  .card:hover{transform:translateY(-2px);box-shadow:0 2px 4px rgba(26,31,39,.05),0 16px 40px rgba(26,31,39,.09)}
+  .score{display:flex;flex-direction:column;align-items:flex-start;gap:8px}
+  .fit{font-family:var(--mono);font-size:34px;font-weight:600;line-height:.9;font-variant-numeric:tabular-nums;color:var(--ink)}
+  .fit.hi{color:var(--accent)}
+  .fit.lo{color:var(--ink-faint)}
+  .fitlabel{font-family:var(--mono);font-size:9.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-faint);margin-top:-4px}
+  .splitbar{width:64px;height:6px;border-radius:3px;overflow:hidden;display:flex;background:var(--line-soft)}
+  .splitbar i{display:block;height:100%}
+  .splitbar .si{background:var(--verd)}
+  .splitbar .sa{background:var(--accent)}
+  .split{font-family:var(--mono);font-size:10.5px;color:var(--ink-faint);letter-spacing:.02em;font-variant-numeric:tabular-nums}
+
+  .body h3{font-family:var(--serif);font-size:20px;line-height:1.22;margin:0 0 8px;text-wrap:balance;padding-right:42px}
+  .tags{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:9px}
+  .tag{font-family:var(--mono);font-size:10.5px;letter-spacing:.05em;text-transform:uppercase;
+    padding:3px 8px;border-radius:5px;border:1px solid var(--line);color:var(--ink-soft);background:var(--surface-2)}
+  .tag.cat{color:var(--ink);border-color:var(--ink-faint)}
+  .tag.cc{color:var(--verd);border-color:var(--verd);background:var(--verd-wash)}
+  .tag.free{color:var(--verd);border-color:var(--verd)}
+  .tag.close{color:var(--accent);border-color:var(--accent);background:var(--accent-wash)}
+  .tag.prem{color:var(--accent);border-color:var(--accent)}
+  .meta{font-size:13.5px;color:var(--ink-soft);margin:0 0 8px;line-height:1.45}
+  .meta .dot{opacity:.5;margin:0 7px}
+  .meta .cost{color:var(--ink);font-weight:600}
+  .desc{font-size:14.5px;color:var(--ink);margin:0 0 12px;line-height:1.5;max-width:70ch}
+  .why{font-size:13.5px;color:var(--ink-soft);line-height:1.45;border-left:2px solid var(--accent-2);
+    padding-left:12px;margin:0 0 10px}
+  .why b{color:var(--ink);font-weight:600}
+  .foot{display:flex;flex-wrap:wrap;gap:10px 16px;align-items:center;font-size:12.5px}
+  .acc{font-family:var(--mono);font-size:11.5px;color:var(--ink-soft);letter-spacing:.02em}
+  .acc.flag{color:var(--flag);background:var(--flag-wash);padding:3px 9px;border-radius:5px}
+  .book{margin-left:auto;font-family:var(--mono);font-size:11.5px;letter-spacing:.04em;text-transform:uppercase;
+    color:var(--accent);text-decoration:none;border-bottom:1px solid transparent;transition:.15s;white-space:nowrap}
+  .book:hover{border-bottom-color:var(--accent)}
+  .book:focus-visible{outline:2px solid var(--accent);outline-offset:3px;border-radius:2px}
+
+  /* View toggle + bookmark star + new badge */
+  .segs{display:flex;gap:12px;flex-wrap:wrap;align-items:center}
+  .star{position:absolute;top:13px;right:14px;width:34px;height:34px;display:inline-flex;align-items:center;
+    justify-content:center;font-size:19px;line-height:1;border:1px solid transparent;border-radius:9px;
+    background:transparent;color:var(--ink-faint);cursor:pointer;transition:.15s;z-index:3}
+  .star:hover{color:var(--accent);background:var(--surface-2);border-color:var(--line)}
+  .star[aria-pressed="true"]{color:var(--accent)}
+  .star:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+  .tag.new{color:var(--surface);background:var(--accent);border-color:var(--accent);font-weight:600}
+
+  .count{font-family:var(--mono);font-size:12px;color:var(--ink-faint)}
+  footer{margin:44px 0 40px;padding-top:20px;border-top:1px solid var(--line);
+    font-size:12.5px;color:var(--ink-soft);line-height:1.55}
+  footer b{color:var(--ink)}
+  .empty{padding:40px;text-align:center;color:var(--ink-faint);font-family:var(--serif)}
+
+  @media (max-width:560px){
+    .card{grid-template-columns:1fr;gap:12px}
+    .score{flex-direction:row;align-items:center;gap:12px}
+    .fit{font-size:30px}
+  }
+  @media (prefers-reduced-motion:reduce){
+    .card{animation:none;opacity:1;transform:none}
+    *{transition:none!important}
+  }
+</style>
+
+<header>
+  <div class="wrap">
+    <div class="brandrow">
+      <h1 class="brand">London Vistas</h1>
+      <div class="kicker">Week of 17 July 2026 · horizon to mid-October</div>
+    </div>
+  </div>
+</header>
+
+<div class="controls">
+  <div class="wrap">
+    <div class="chiprow" id="chips"></div>
+    <div class="toolrow">
+      <div class="segs">
+        <div class="seg" role="group" aria-label="View">
+          <button id="viewAll" type="button" aria-pressed="true">All</button>
+          <button id="viewSaved" type="button" aria-pressed="false">★ Saved <span id="savedCount"></span></button>
+        </div>
+        <div class="seg" role="group" aria-label="Sort order">
+          <button id="sortDate" type="button" aria-pressed="false">By date</button>
+          <button id="sortFit" type="button" aria-pressed="true">By fit score</button>
+        </div>
+      </div>
+      <div class="weight">
+        <label>Interest <span class="val" id="wI">40%</span></label>
+        <input type="range" id="slider" min="0" max="100" step="5" value="60" aria-label="Balance between interest match and critical acclaim">
+        <label>Acclaim <span class="val" id="wA">60%</span></label>
+      </div>
+    </div>
+  </div>
+</div>
+
+<main class="wrap">
+  <div class="seclabel" id="listLabel"><span id="listTitle">Ranked by fit</span> <span class="count" id="count"></span></div>
+  <div class="grid" id="list"></div>
+  <section class="gems" id="gemsSec">
+    <div class="seclabel">Also worth a look — strong fit, not yet reviewed</div>
+    <div class="gemscroll" id="gems"></div>
+  </section>
+</main>
+
+<footer class="wrap">
+  <p><b>How the fit score works.</b> Fit = (Interest × <span id="fI">40%</span>) + (Acclaim × <span id="fA">60%</span>). <b>Interest</b> rewards overlap with history, politics, science, art, design and music (with your specific taste in classical, Indian classical, neo-classical, ambient, lo-fi and world music), and gives a lift to anything cross-cultural. <b>Acclaim</b> starts from a standard host-prestige stand-in of 50 for anything not yet reviewed, and adds 10 for a good external review or canonical status — so strong critical reception nudges an event up without dominating. Not-yet-reviewed events keep an informational flag and are also gathered under <b>strong fit, not yet reviewed</b> at the foot of the page. Badges (Cross-cultural, Free, Closing soon, Premiere) are information only and never change the ranking.</p>
+  <p style="margin-top:10px;color:var(--ink-faint)">Draft v1 · data gathered 17 July 2026 from venue listings · always confirm dates, prices and availability on the venue's own page before booking.</p>
+</footer>
+
+<script>
+const TODAY = new Date("2026-07-17T00:00:00");
+const DAY = 864e5;
+
+// i = interest(0-100), a = acclaim(0-100), af = acclaim flag: null | "unreviewed" | "limited"
+const EV = [
+ {t:"First Night of the BBC Proms 2026: An American Celebration",c:"Music",cc:false,g:"Western classical",st:"2026-07-17",en:"2026-07-17",dl:"Fri 17 Jul 2026",v:"Royal Albert Hall",ar:"South Kensington",co:"From £8 (Promming) – £90",d:"BBC SO under Dalia Stasevska open the festival with Copland, Gershwin and a world premiere; Korean pianist Yunchan Lim plays Ravel.",i:80,iw:"Western classical, the flagship opening night of the world's biggest classical festival.",a:35,as:"Not yet reviewed — Proms opening night",af:"unreviewed",b:["One night"],u:"https://www.royalalberthall.com/tickets/proms/bbc-proms-2026"},
+ {t:"Groundings on a Black Planet",c:"Science",cc:true,g:null,st:"2026-07-17",en:"2026-07-17",dl:"Fri 17 Jul 2026",v:"Barbican Centre",ar:"Barbican / City",co:"Ticketed",d:"An evening of sound, archive and 'reasoning' exploring Pan-African thought, part of the Barbican's Project a Black Planet season.",i:92,iw:"Music, politics and history braided together — Pan-African thought; strongly cross-cultural.",a:72,as:"Barbican — major centre-wide season",af:null,b:["One night"],u:"https://www.barbican.org.uk/whats-on/talks-events"},
+ {t:"Creating Pan-African Cinema",c:"Science",cc:true,g:null,st:"2026-07-22",en:"2026-07-22",dl:"Wed 22 Jul 2026",v:"Barbican Centre",ar:"Barbican / City",co:"Ticketed",d:"A workshop with Stuart Hall's archives and the June Givanni PanAfrican Cinema Archive.",i:86,iw:"History and politics of Black diasporic cinema — cross-cultural.",a:72,as:"Barbican — season programme",af:null,b:[],u:"https://www.barbican.org.uk/whats-on/talks-events"},
+ {t:"Deconstructing Utopia: an evening of dialogue",c:"Science",cc:true,g:null,st:"2026-07-22",en:"2026-07-22",dl:"Wed 22 Jul 2026",v:"Barbican Centre",ar:"Barbican / City",co:"Ticketed",d:"Catalina Mejía Moreno and Jamille Pinheiro Dias interrogate ideas of utopia across global and postcolonial perspectives.",i:86,iw:"Politics and history through a postcolonial, cross-cultural lens.",a:72,as:"Barbican — talks programme",af:null,b:[],u:"https://www.barbican.org.uk/whats-on/talks-events"},
+ {t:"Edna Bonhomme & Lola Olufemi: Tending to Our Wounds",c:"Literature",cc:true,g:null,st:"2026-07-21",en:"2026-07-21",dl:"Tue 21 Jul 2026",v:"London Review Bookshop",ar:"Bloomsbury",co:"£10",d:"Historian Edna Bonhomme on illness, care and inequality across the globe, with writer-theorist Lola Olufemi.",i:94,iw:"Science, politics and history of health across cultures — squarely in your wheelhouse.",a:74,as:"London Review Bookshop — prestigious literary venue",af:null,b:[],u:"https://www.londonreviewbookshop.co.uk/events"},
+ {t:"Summer Scholars: Empire, Latin America & Indigenous Voices",c:"Literature",cc:true,g:null,st:"2026-07-21",en:"2026-08-25",dl:"21 Jul – 25 Aug 2026 · lunchtime series",v:"British Library",ar:"King's Cross",co:"Free",d:"Free lunchtime talks from Library research fellows on women in the history of empire, Latin American collections and Indigenous women's voices.",i:86,iw:"History and politics from global, non-Western perspectives — and free.",a:80,as:"British Library — flagship research institution",af:null,b:[],u:"https://events.bl.uk/whats-on/literature-at-the-library"},
+ {t:"Prom: Beethoven's Ninth Symphony",c:"Music",cc:false,g:"Western classical",st:"2026-07-20",en:"2026-07-20",dl:"Mon 20 Jul 2026",v:"Royal Albert Hall",ar:"South Kensington",co:"From £8 (Promming)",d:"Gianandrea Noseda conducts the BBC Philharmonic in Beethoven's Choral Symphony, with a Jessie Montgomery UK premiere and cellist Abel Selaocoe.",i:80,iw:"Western classical at its grandest — the Ninth under a leading conductor.",a:35,as:"Not yet reviewed — Proms concert",af:"unreviewed",b:["One night"],u:"https://www.royalalberthall.com/tickets/proms/bbc-proms-2026"},
+ {t:"Debashish Bhattacharya & Gurdain Rayatt — Darbar Bhaitak",c:"Music",cc:true,g:"Indian classical",st:"2026-07-25",en:"2026-07-25",dl:"Sat 25 Jul 2026",v:"Darbar Arts Lab",ar:"Central London",co:"Ticketed",d:"Intimate salon-style Hindustani recital by the Grammy-nominated slide-guitar (chaturangui) master, with tabla.",i:90,iw:"Indian classical from a Grammy-nominated master, in the most intimate setting — a direct hit.",a:35,as:"Not yet reviewed — Darbar (UK's leading Indian classical promoter)",af:"unreviewed",b:["One night"],u:"https://www.eventbrite.co.uk/e/debashish-bhattacharya-gurdain-rayatt-darbar-bhaitak-series-tickets-1994149196929"},
+ {t:"Tracing My History",c:"Science",cc:true,g:null,st:"2026-07-25",en:"2026-07-25",dl:"Sat 25 Jul 2026",v:"Wellcome Collection",ar:"Euston",co:"Free",d:"A discussion on how people trace personal, family and cultural histories and identity, drawing on the collection.",i:86,iw:"History and the science of identity, cross-cultural — and free.",a:80,as:"Wellcome Collection — major research institution",af:null,b:[],u:"https://wellcomecollection.org/events"},
+ {t:"Sounds of India: Akash Parekar & Janan Sathiendran",c:"Music",cc:true,g:"Indian classical",st:"2026-07-31",en:"2026-07-31",dl:"Fri 31 Jul 2026",v:"St Martin-in-the-Fields",ar:"Trafalgar Square",co:"Free (retiring donation)",d:"A lunchtime Indian classical recital with emerging Hindustani and Carnatic artists, presented with Darbar.",i:88,iw:"Indian classical, cross-cultural, and free — exactly your kind of discovery.",a:35,as:"Not yet reviewed — St Martin's / Darbar series",af:"unreviewed",b:[],u:"https://www.stmartin-in-the-fields.org/whats-on/sounds-of-india-akash-parekar-and-janan-sathiendran/"},
+ {t:"The Human Condition Trilogy (Masaki Kobayashi)",c:"Film",cc:true,g:null,st:"2026-07-13",en:"2026-08-10",dl:"until 10 Aug 2026",v:"Prince Charles Cinema",ar:"Leicester Square",co:"£8–£14.50",d:"Restoration screenings of Kobayashi's near-ten-hour Japanese epic on one man's moral struggle through wartime Manchuria.",i:94,iw:"Art, history and the politics of war and conscience — a cross-cultural masterwork.",a:92,as:"Canonical masterwork of Japanese cinema",af:null,b:["Restoration"],u:"https://princecharlescinema.com/seasons-events/"},
+ {t:"Bullets and Brotherhood: The Films of John Woo",c:"Film",cc:true,g:null,st:"2026-07-18",en:"2026-07-25",dl:"18–25 Jul 2026",v:"BFI Southbank",ar:"South Bank",co:"≈£16",d:"Retrospective of the Hong Kong action master's 'heroic bloodshed' cinema, including The Killer and Hard Boiled.",i:74,iw:"Cross-cultural cinema — canonical Hong Kong action.",a:84,as:"Canonical Hong Kong cinema (BFI season)",af:null,b:[],u:"https://whatson.bfi.org.uk/"},
+ {t:"Wong Kar Wai (retrospective)",c:"Film",cc:true,g:null,st:"2026-07-18",en:"2026-09-30",dl:"from 18 Jul 2026",v:"Prince Charles Cinema",ar:"Leicester Square",co:"£8–£14.50",d:"Seven films through the Hong Kong auteur's lush, romantic filmography, including In the Mood for Love.",i:74,iw:"Cross-cultural — In the Mood for Love tops greatest-of-the-century polls.",a:90,as:"Canonical world cinema",af:null,b:[],u:"https://princecharlescinema.com/seasons-events/"},
+ {t:"David Lynch Forever",c:"Film",cc:false,g:null,st:"2026-07-21",en:"2026-08-31",dl:"from 21 Jul 2026",v:"Prince Charles Cinema",ar:"Leicester Square",co:"£8–£14.50",d:"Eight-film tribute to the late American surrealist, from Eraserhead to Mulholland Drive.",i:68,iw:"Art cinema at its most singular — a landmark auteur.",a:88,as:"Canonical (Mulholland Drive topped BBC's C21 poll)",af:null,b:[],u:"https://princecharlescinema.com/seasons-events/"},
+ {t:"Frida: The Making of an Icon",c:"Art",cc:true,g:null,st:"2026-07-17",en:"2027-01-03",dl:"On now – until 3 Jan 2027",v:"Tate Modern",ar:"Bankside",co:"From £24",d:"130+ works trace how Kahlo became a global phenomenon, shown alongside peers and artists she influenced.",i:86,iw:"Modern art plus a feminist-political icon, cross-cultural (Mexican).",a:60,as:"★★★ Time Out; mixed (Frieze, The Standard)",af:null,b:[],u:"https://www.tate.org.uk/whats-on/tate-modern/frida-kahlo-the-making-of-an-icon"},
+ {t:"Ana Mendieta",c:"Art",cc:true,g:null,st:"2026-07-17",en:"2027-01-10",dl:"On now – until 10 Jan 2027",v:"Tate Modern",ar:"Bankside",co:"Ticketed",d:"First comprehensive UK survey in over a decade — earth-body 'Silueta' works, films and sculpture drawing on Santería and diaspora.",i:88,iw:"Art, ritual and diasporic identity — deeply cross-cultural.",a:35,as:"Newly opened — not yet reviewed",af:"unreviewed",b:[],u:"https://www.tate.org.uk/whats-on/tate-modern/ana-mendieta"},
+ {t:"Julio Le Parc: Light. Colour. Action.",c:"Art",cc:true,g:null,st:"2026-07-17",en:"2027-05-03",dl:"On now – until 3 May 2027",v:"Tate Modern",ar:"Bankside",co:"£15",d:"Seven decades of joyful kinetic, optical and participatory art by the Argentine pioneer of luminokinetic light.",i:86,iw:"Art and design (kinetic/optical), cross-cultural (Argentine).",a:76,as:"Positive (FAD, Studio International)",af:null,b:[],u:"https://www.tate.org.uk/whats-on/tate-modern/julio-le-parc"},
+ {t:"James McNeill Whistler",c:"Art",cc:false,g:null,st:"2026-07-17",en:"2026-09-27",dl:"On now – until 27 Sep 2026",v:"Tate Britain",ar:"Millbank",co:"From £24",d:"Major retrospective of the American-born artist who transformed Victorian art — ~150 works across media.",i:80,iw:"Art and history — a landmark retrospective.",a:92,as:"★★★★★ Time Out; Guardian rave",af:null,b:[],u:"https://www.tate.org.uk/whats-on/tate-britain/whistler"},
+ {t:"Anish Kapoor",c:"Art",cc:false,g:null,st:"2026-07-17",en:"2026-10-18",dl:"On now – until 18 Oct 2026",v:"Hayward Gallery",ar:"South Bank",co:"£22",d:"Kapoor's largest UK show to date fills the building with monumental new work using light-absorbing nanotechnology.",i:68,iw:"Contemporary sculpture at the largest scale.",a:92,as:"★★★★★ Guardian; ★★★★ Independent, Telegraph",af:null,b:[],u:"https://www.southbankcentre.co.uk/whats-on/anish-kapoor/"},
+ {t:"Project a Black Planet: The Art and Culture of Panafrica",c:"Art",cc:true,g:null,st:"2026-07-17",en:"2026-09-06",dl:"On now – until 6 Sep 2026",v:"Barbican Art Gallery",ar:"Barbican / City",co:"£19",d:"~300 works examining Pan-Africanism's influence on visual art, from Africa, Brazil, the Caribbean and beyond.",i:94,iw:"Art, politics and history of the Pan-African world — richly cross-cultural.",a:60,as:"Mixed (~★★★); 'essayistic' (Arts Desk)",af:null,b:[],u:"https://www.barbican.org.uk/whats-on/2026/event/project-a-black-planet-the-art-and-culture-of-panafrica"},
+ {t:"Hong Kong Golden Age 1985–1997",c:"Film",cc:true,g:null,st:"2026-07-17",en:"2026-08-27",dl:"On now – until 27 Aug 2026",v:"The Garden Cinema",ar:"Covent Garden",co:"≈£12 (£10 concs)",d:"Hong Kong cinema's most prolific era — Wong Kar-wai, Stanley Kwan, Tsui Hark, John Woo — with Stanley Kwan in person on 26 Aug.",i:86,iw:"Art and history of a cross-cultural golden age; a director appears in person.",a:88,as:"Canonical world-cinema season",af:null,b:["Director in person"],u:"https://www.thegardencinema.co.uk/season/hong-kong-golden-age-1985-1997/"},
+ {t:"Natural Information Society (two-night residency)",c:"Music",cc:true,g:"Ambient",st:"2026-08-16",en:"2026-08-17",dl:"16–17 Aug 2026",v:"Café OTO",ar:"Dalston",co:"£19/night · £29 both",d:"Hypnotic minimalism weaving Moroccan guimbri, harmonium and drums between minimalism, spiritual jazz and drone; Evan Parker guests.",i:88,iw:"Ambient/drone and world instrumentation at London's foremost experimental room.",a:35,as:"Not yet reviewed — Café OTO (NIS acclaimed by The Wire, Pitchfork)",af:"unreviewed",b:[],u:"https://www.cafeoto.co.uk/events/natural-information-society-2026/"},
+ {t:"Barbican Outdoor Cinema 2026",c:"Film",cc:true,g:null,st:"2026-08-19",en:"2026-08-30",dl:"19–30 Aug 2026",v:"Barbican Sculpture Court",ar:"Barbican / City",co:"≈£17.50",d:"Open-air world cinema and classics — Panahi's Offside, Diop's Atlantics, Godard's Pierrot le Fou, Shinkai's Weathering With You.",i:74,iw:"Cross-cultural open-air programme spanning Iran, Senegal, France and Japan.",a:80,as:"Atlantics 95% RT; canonical mixed programme",af:null,b:[],u:"https://www.barbican.org.uk/whats-on/2026/series/mastercard-outdoor-cinema-2026"},
+ {t:"Jahnavi Harrison",c:"Music",cc:true,g:"World / devotional",st:"2026-08-22",en:"2026-08-22",dl:"Sat 22 Aug 2026",v:"Union Chapel",ar:"Islington",co:"≈£30–£49",d:"Devotional kirtan and sacred mantra from the London singer-multi-instrumentalist, drawing on the Bhakti tradition.",i:88,iw:"World/devotional music in a Grade I-listed acoustic — cross-cultural.",a:35,as:"Not yet reviewed — Union Chapel",af:"unreviewed",b:[],u:"https://unionchapel.org.uk/whats-on"},
+ {t:"Prom: Met Orchestra with Joyce DiDonato — Mahler & Saariaho",c:"Music",cc:false,g:"Western classical",st:"2026-08-27",en:"2026-08-27",dl:"Thu 27 Aug 2026",v:"Royal Albert Hall",ar:"South Kensington",co:"From £8 (Promming) – £114",d:"The Metropolitan Opera Orchestra's Proms debut under Yannick Nézet-Séguin — Saariaho and Mahler's Fourth, with mezzo Joyce DiDonato.",i:80,iw:"Western classical — a marquee Proms debut.",a:35,as:"Not yet reviewed — Proms concert",af:"unreviewed",b:["One night"],u:"https://www.royalalberthall.com/tickets/proms/bbc-proms-2026"},
+ {t:"Electra/Persona",c:"Theatre",cc:true,g:null,st:"2026-08-19",en:"2026-10-10",dl:"19 Aug – 10 Oct 2026",v:"National Theatre (Lyttelton)",ar:"South Bank",co:"£110–£143",d:"Benedict Andrews fuses Sophocles with Bergman's Persona, starring Cate Blanchett, Nina Hoss and Ella Lily Hyland.",i:86,iw:"Art and history — Greek tragedy meets Bergman, cross-cultural.",a:35,as:"Not yet reviewed — opens 19 Aug",af:"unreviewed",b:[],u:"https://www.nationaltheatre.org.uk/productions/electra-persona/"},
+ {t:"A Month in the Country",c:"Theatre",cc:true,g:null,st:"2026-08-22",en:"2026-10-03",dl:"22 Aug – 3 Oct 2026",v:"Donmar Warehouse",ar:"Covent Garden",co:"£15–£70",d:"Brian Friel's version of Turgenev's Russian classic, directed by Lyndsey Turner.",i:74,iw:"Cross-cultural — a Russian classic in a fine translation.",a:35,as:"Not yet reviewed — press night 2 Sep",af:"unreviewed",b:[],u:"https://www.donmarwarehouse.com/events/a-month-in-the-country/"},
+ {t:"The Oresteia",c:"Theatre",cc:true,g:null,st:"2026-07-17",en:"2026-09-19",dl:"On now – until 19 Sep 2026",v:"Bridge Theatre",ar:"London Bridge",co:"From £30",d:"Simon Stone reimagines Aeschylus' tragic trilogy as a true-crime family saga, with David Morrissey and Mary-Louise Parker.",i:80,iw:"Art and history — Greek tragedy, cross-cultural source.",a:82,as:"★★★★ WhatsOnStage",af:null,b:[],u:"https://www.bridgetheatre.co.uk/whats-on/the-oresteia/"},
+ {t:"Much Ado About Nothing",c:"Theatre",cc:false,g:null,st:"2026-07-17",en:"2026-10-24",dl:"On now – until 24 Oct 2026",v:"Shakespeare's Globe",ar:"Bankside",co:"£5–£88",d:"Chelsea Walker's fast, music-and-dance-filled summer staging, with Pippa Nixon and Ken Nwosu.",i:80,iw:"Theatre and live music — Shakespeare at the Globe.",a:82,as:"★★★★ WhatsOnStage",af:null,b:[],u:"https://www.shakespearesglobe.com/whats-on/much-ado-about-nothing/"},
+ {t:"The Coming of Age",c:"Art",cc:true,g:null,st:"2026-07-17",en:"2026-11-29",dl:"On now – until 29 Nov 2026",v:"Wellcome Collection",ar:"Euston",co:"Free",d:"120+ artworks and objects exploring ageing across cultures as a social issue shaped by policy and inequality.",i:97,iw:"Science, art, history and politics of ageing across cultures — and free.",a:76,as:"Positive (Studio International, Museums Association)",af:null,b:[],u:"https://wellcomecollection.org/exhibitions"},
+ {t:"Rising Voices: Contemporary Art from Asia, Australia and the Pacific",c:"Art",cc:true,g:null,st:"2026-07-17",en:"2027-01-10",dl:"On now – until 10 Jan 2027",v:"V&A South Kensington",ar:"South Kensington",co:"From £17",d:"70+ works by 40+ artists — sculpture, weaving, ceramics, body adornment — many shown outside the region for the first time.",i:86,iw:"Art and design from across the non-Western Pacific — cross-cultural.",a:76,as:"Positive reviews (star ratings unconfirmed)",af:null,b:[],u:"https://www.vam.ac.uk/exhibitions/rising-voices-contemporary-art-from-asia-australia-and-the-pacific"},
+ {t:"NIGO: From Japan with Love",c:"Art",cc:true,g:null,st:"2026-07-17",en:"2026-10-04",dl:"On now – until 4 Oct 2026",v:"Design Museum",ar:"Kensington",co:"Ticketed",d:"The vision and legacy of the Japanese designer, DJ and creative director across streetwear, music and design.",i:86,iw:"Design and music culture, cross-cultural (Japan).",a:35,as:"Limited critical data",af:"limited",b:[],u:"https://designmuseum.org/exhibitions"},
+ {t:"Japanese Women Photographers",c:"Art",cc:true,g:null,st:"2026-07-17",en:"2026-09-27",dl:"On now – until 27 Sep 2026",v:"The Photographers' Gallery",ar:"Soho",co:"Ticketed",d:"A landmark show reframing Japanese photography through 27 women working from the 1950s to today.",i:86,iw:"Art and history through a cross-cultural, gendered lens.",a:76,as:"Positive reviews (star ratings unconfirmed)",af:null,b:[],u:"https://thephotographersgallery.org.uk/whats-on"},
+ {t:"M.C. Escher: The Exhibition",c:"Art",cc:false,g:null,st:"2026-07-17",en:"2026-09-06",dl:"On now – until 6 Sep 2026",v:"Somerset House",ar:"Strand",co:"Ticketed",d:"First major London show of the Dutch graphic artist — 150+ works including Waterfall and Ascending and Descending.",i:88,iw:"Art, science (geometry) and design in one — a rare triple hit.",a:82,as:"★★★★ Time Out",af:null,b:[],u:"https://www.somersethouse.org.uk/whats-on/mc-escher-the-exhibition"},
+ {t:"George Clinton: Afrofuturism",c:"Art",cc:true,g:null,st:"2026-07-17",en:"2026-09-20",dl:"On now – until 20 Sep 2026",v:"Somerset House",ar:"Strand",co:"Ticketed",d:"Painting, music, fashion and design tracing Clinton's role as a pioneer of Afrofuturism.",i:86,iw:"Art and music culture, cross-cultural (Afrofuturism).",a:35,as:"Limited critical data",af:"limited",b:[],u:"https://www.somersethouse.org.uk/whats-on"},
+ {t:"Gabriel Chaile: Archaeology of Memory",c:"Art",cc:true,g:null,st:"2026-07-17",en:"2026-09-06",dl:"On now – until 6 Sep 2026",v:"Whitechapel Gallery",ar:"Whitechapel",co:"Free",d:"Large-scale adobe and clay sculptures drawing on pre-Columbian and Indigenous South American traditions.",i:86,iw:"Art and history rooted in Indigenous tradition — cross-cultural and free.",a:35,as:"Limited critical data",af:"limited",b:[],u:"https://www.whitechapelgallery.org/exhibitions/"},
+ {t:"John Berger: From Life",c:"Literature",cc:false,g:null,st:"2026-09-03",en:"2026-09-03",dl:"Thu 3 Sep 2026",v:"British Library",ar:"King's Cross",co:"Ticketed",d:"Tom Overton launches his major biography of the Ways of Seeing writer, 100 years after Berger's birth.",i:80,iw:"Art criticism and politics — Berger's radical way of seeing.",a:80,as:"British Library — flagship literary launch",af:null,b:[],u:"https://events.bl.uk/events/john-berger-from-life"},
+ {t:"Goalhanger: The Rest Is Fest",c:"Science",cc:false,g:null,st:"2026-09-04",en:"2026-09-06",dl:"4–6 Sep 2026",v:"Southbank Centre",ar:"South Bank",co:"Ticketed",d:"A live festival from the makers of The Rest Is History/Politics, with leading commentators.",i:80,iw:"History and politics, live — from the biggest podcast in the field.",a:74,as:"Southbank Centre — flagship venue",af:null,b:[],u:"https://www.southbankcentre.co.uk/events/goalhanger-the-rest-is-fest/"},
+ {t:"Roger Eno and Hinako Omori",c:"Music",cc:false,g:"Neo-classical",st:"2026-09-09",en:"2026-09-09",dl:"Wed 9 Sep 2026",v:"Union Chapel",ar:"Islington",co:"≈£38",d:"Ambient/neo-classical evening — Roger Eno performs from his Deutsche Grammophon trilogy, with synthesist Hinako Omori.",i:80,iw:"Neo-classical and ambient — a direct hit on your taste.",a:35,as:"Not yet reviewed — Deutsche Grammophon artist at a prestige venue",af:"unreviewed",b:[],u:"https://unionchapel.org.uk/whats-on/roger-eno"},
+ {t:"Víkingur Ólafsson: Bach, Beethoven & Schubert",c:"Music",cc:false,g:"Western classical",st:"2026-09-10",en:"2026-09-12",dl:"10–12 Sep 2026",v:"Wigmore Hall",ar:"Marylebone",co:"≈£20–£60",d:"The Icelandic pianist gives a recital residency tracing the threads binding Bach, Beethoven and the young Schubert.",i:80,iw:"Western classical piano of the highest order at Britain's foremost recital hall.",a:35,as:"Not yet reviewed — Wigmore Hall recital",af:"unreviewed",b:[],u:"https://www.wigmore-hall.org.uk/whats-on/series/202627-season-september-december"},
+ {t:"Creative Intelligence (festival)",c:"Science",cc:false,g:null,st:"2026-09-11",en:"2026-09-13",dl:"11–13 Sep 2026",v:"Southbank Centre",ar:"South Bank",co:"Some free; some ticketed",d:"A weekend of talks and demos on how human imagination and agency interact with technology, AI and innovation.",i:80,iw:"Science, technology and design — ideas about creativity and AI.",a:74,as:"Southbank Centre — flagship venue",af:null,b:[],u:"https://www.southbankcentre.co.uk/whats-on/?artform-filter=talks-debates"},
+ {t:"Jeanette Winterson: Creativity, Artists, Us",c:"Literature",cc:false,g:null,st:"2026-09-13",en:"2026-09-13",dl:"Sun 13 Sep 2026",v:"Queen Elizabeth Hall, Southbank",ar:"South Bank",co:"Ticketed",d:"The novelist leads a discussion on art, AI and the future of creativity, part of the Creative Intelligence festival.",i:80,iw:"Art, science and ideas — creativity in the age of AI.",a:74,as:"Southbank Centre — flagship venue",af:null,b:[],u:"https://www.southbankcentre.co.uk/events/creative-intelligence/"},
+ {t:"Warsaw Jazz Takeover: Masecki · HVMBLE · Warsaw Village Band",c:"Music",cc:true,g:"World",st:"2026-09-13",en:"2026-09-13",dl:"Sun 13 Sep 2026",v:"Union Chapel",ar:"Islington",co:"Ticketed",d:"Contemporary Polish music — pianist Marcin Masecki's trio and the folk-electric Warsaw Village Band (BBC R3 World Music Award).",i:88,iw:"World music and reinvented folk — cross-cultural discovery.",a:35,as:"Not yet reviewed — award-winning artists at a prestige venue",af:"unreviewed",b:[],u:"https://www.songkick.com/venues/1816-union-chapel/calendar"},
+ {t:"Denise Riley & Emily Berry: A Chorus of Ears",c:"Literature",cc:false,g:null,st:"2026-09-08",en:"2026-09-08",dl:"Mon 8 Sep 2026",v:"London Review Bookshop",ar:"Bloomsbury",co:"£10 (sold out)",d:"Poets Denise Riley and Emily Berry read and discuss new work in an evening of contemporary verse.",i:68,iw:"Contemporary poetry from a major British poet.",a:74,as:"Sold out (strong demand) — London Review Bookshop",af:null,b:["Sold out"],u:"https://www.londonreviewbookshop.co.uk/events"},
+ {t:"Man to Man",c:"Theatre",cc:true,g:null,st:"2026-09-05",en:"2026-10-24",dl:"5 Sep – 24 Oct 2026",v:"Royal Court Theatre",ar:"Sloane Square",co:"From £30 (£15 Mondays)",d:"Tilda Swinton returns to the stage after 30+ years in Manfred Karge's German solo play of survival and stolen identity.",i:86,iw:"Art and politics of identity — cross-cultural (German), a rare Swinton stage turn.",a:35,as:"Not yet reviewed — opens Sep",af:"unreviewed",b:[],u:"https://royalcourttheatre.com/events/man-to-man/"},
+ {t:"Prom: Berlin Philharmonic & Kirill Petrenko",c:"Music",cc:false,g:"Western classical",st:"2026-09-02",en:"2026-09-02",dl:"Wed 2 Sep 2026",v:"Royal Albert Hall",ar:"South Kensington",co:"From £8 (Promming) – £114",d:"The Berlin Philharmonic under Kirill Petrenko perform Elgar's Enigma Variations and Tchaikovsky's Fourth.",i:80,iw:"Western classical — one of the great orchestras of the world.",a:35,as:"Not yet reviewed — Proms concert",af:"unreviewed",b:["One night"],u:"https://www.royalalberthall.com/tickets/proms/bbc-proms-2026"},
+ {t:"Prom: Martha Argerich plays Beethoven",c:"Music",cc:false,g:"Western classical",st:"2026-09-05",en:"2026-09-05",dl:"Sat 5 Sep 2026",v:"Royal Albert Hall",ar:"South Kensington",co:"From £8 (Promming) – £114",d:"Martha Argerich joins the Munich Philharmonic under Lahav Shani for Beethoven's Second Concerto, with Farrenc and Brahms.",i:80,iw:"Western classical — a landmark appearance by a revered pianist.",a:35,as:"Not yet reviewed — Proms concert",af:"unreviewed",b:["One night"],u:"https://www.royalalberthall.com/tickets/proms/bbc-proms-2026"},
+ {t:"Catarina and the Beauty of Killing Fascists",c:"Theatre",cc:true,g:null,st:"2026-09-19",en:"2026-09-26",dl:"19–26 Sep 2026",v:"National Theatre (Dorfman)",ar:"South Bank",co:"See NT listing",d:"UK premiere of Tiago Rodrigues' play, in Portuguese with English surtitles — a family's ritual thrown into crisis.",i:74,iw:"Politics and cross-cultural theatre — a Portuguese-language UK premiere.",a:35,as:"Not yet reviewed — opens 19 Sep",af:"unreviewed",b:["UK premiere"],u:"https://www.nationaltheatre.org.uk/productions/catarina-and-the-beauty-of-killing-fascists/"},
+ {t:"Golden Boy",c:"Theatre",cc:false,g:null,st:"2026-09-09",en:"2026-10-31",dl:"9 Sep – 31 Oct 2026",v:"Almeida Theatre",ar:"Islington",co:"Sold out (returns only)",d:"Josh O'Connor stars in Clifford Odets' 1930s tragedy of a violinist lured into boxing, with a live string quartet.",i:80,iw:"Theatre and live music — a violinist's story, staged with a quartet.",a:35,as:"Not yet reviewed — opens 15 Sep",af:"unreviewed",b:["Sold out"],u:"https://almeida.co.uk/whats-on/golden-boy/"},
+ {t:"Rebecca F Kuang: The Future of Education",c:"Science",cc:true,g:null,st:"2026-09-19",en:"2026-09-19",dl:"Sat 19 Sep 2026",v:"Queen Elizabeth Hall, Southbank",ar:"South Bank",co:"From £20",d:"The bestselling author curates a panel on the ideas reshaping learning in the 21st century.",i:86,iw:"Politics and science of education, cross-cultural voices.",a:74,as:"Southbank Centre — flagship venue",af:null,b:[],u:"https://www.southbankcentre.co.uk/whats-on/rebecca-f-kuang-the-future-of-education/"},
+ {t:"Lawrence Abu Hamdan: The Crack and the Boom",c:"Science",cc:true,g:null,st:"2026-09-26",en:"2026-09-26",dl:"Sat 26 Sep 2026",v:"Barbican Centre",ar:"Barbican / City",co:"Ticketed",d:"The Turner-nominated artist on the role of sound and listening in documenting global events and conflict.",i:94,iw:"Science (acoustics/forensics), politics and art — cross-cultural and singular.",a:74,as:"Barbican — talks programme (Turner-nominated artist)",af:null,b:[],u:"https://www.barbican.org.uk/whats-on/talks-events"},
+ {t:"John Akomfrah (retrospective)",c:"Film",cc:true,g:null,st:"2026-09-01",en:"2026-09-30",dl:"September 2026",v:"BFI Southbank",ar:"South Bank",co:"≈£16",d:"Season on the British-Ghanaian filmmaker whose essay films interrogate migration, memory and diaspora.",i:94,iw:"Art, politics and history of migration and memory — cross-cultural.",a:84,as:"Turner-nominated; internationally acclaimed (BFI season)",af:null,b:[],u:"https://whatson.bfi.org.uk/"},
+ {t:"Peter Watkins (retrospective)",c:"Film",cc:false,g:null,st:"2026-08-01",en:"2026-08-31",dl:"August 2026",v:"BFI Southbank",ar:"South Bank",co:"≈£16",d:"The radical documentary-drama pioneer behind The War Game and Culloden — landmark political cinema.",i:88,iw:"Politics, history and art — the most confrontational of political filmmakers.",a:86,as:"The War Game won the 1966 Documentary Oscar",af:null,b:[],u:"https://whatson.bfi.org.uk/"},
+ {t:"Billy Wilder (retrospective)",c:"Film",cc:false,g:null,st:"2026-10-01",en:"2026-10-31",dl:"from October 2026",v:"BFI Southbank",ar:"South Bank",co:"≈£16",d:"Career-spanning season for the writer-director of Some Like It Hot, Sunset Boulevard and The Apartment.",i:80,iw:"Art and 20th-century history through Hollywood's sharpest wit.",a:90,as:"Multiple-Oscar-winning canonical auteur",af:null,b:[],u:"https://whatson.bfi.org.uk/"},
+ {t:"Claude Chabrol — Elements of Crime",c:"Film",cc:true,g:null,st:"2026-09-01",en:"2026-10-06",dl:"1 Sep – 6 Oct 2026",v:"BFI Southbank",ar:"South Bank",co:"≈£16",d:"Major retrospective of the French New Wave master — 20+ films, several on 35mm, from Le Beau Serge to La Cérémonie.",i:74,iw:"Cross-cultural — a foundational Nouvelle Vague auteur.",a:90,as:"Canonical French cinema (BFI season)",af:null,b:[],u:"https://whatson.bfi.org.uk/"},
+ {t:"Aqua-Cinema: L'Atalante + Painlevé shorts",c:"Film",cc:true,g:null,st:"2026-08-12",en:"2026-08-12",dl:"Wed 12 Aug 2026",v:"ICA",ar:"The Mall",co:"≈£13",d:"Jean Vigo's canonical L'Atalante (1934) paired with Jean Painlevé's mesmerising undersea shorts.",i:86,iw:"Art and the science of the natural world — a cross-cultural classic, one night.",a:90,as:"L'Atalante — canonical (Sight & Sound poll)",af:null,b:["One night"],u:"https://www.ica.art/films"},
+ {t:"Unveiling Vermeer: Andrew Graham-Dixon",c:"Science",cc:false,g:null,st:"2026-10-08",en:"2026-10-08",dl:"Thu 8 Oct 2026",v:"Conway Hall",ar:"Holborn",co:"Ticketed",d:"The art historian presents a new theory about Vermeer and the identity behind Girl with a Pearl Earring.",i:80,iw:"Art and history — a fresh argument about a canonical painter.",a:76,as:"Intelligence Squared — renowned talks brand",af:null,b:[],u:"https://www.intelligencesquared.com/events/unveiling-vermeer-andrew-graham-dixon-on-the-man-and-his-masterpieces/"},
+ {t:"PEN Pinter Prize 2026: Jacqueline Rose",c:"Literature",cc:true,g:null,st:"2026-10-08",en:"2026-10-08",dl:"Thu 8 Oct 2026",v:"British Library",ar:"King's Cross",co:"Ticketed",d:"Jacqueline Rose receives the PEN Pinter Prize and delivers an address; the international 'Writer of Courage' is announced.",i:74,iw:"Politics of free expression — cross-cultural, a prestigious award.",a:80,as:"British Library / English PEN — flagship literary event",af:null,b:[],u:"https://events.bl.uk/whats-on/cultural-events"},
+ {t:"Carminho",c:"Music",cc:true,g:"World / fado",st:"2026-10-04",en:"2026-10-04",dl:"Sun 4 Oct 2026",v:"Union Chapel",ar:"Islington",co:"Ticketed",d:"One of fado's most acclaimed contemporary voices performs from her seventh album.",i:88,iw:"World music — Portuguese fado at its most expressive, cross-cultural.",a:35,as:"Not yet reviewed — acclaimed artist at a prestige venue",af:"unreviewed",b:[],u:"https://unionchapel.org.uk/whats-on/carminho"},
+ {t:"Don Giovanni (Mozart) — The Royal Opera",c:"Music",cc:false,g:"Opera",st:"2026-09-10",en:"2026-10-15",dl:"10 Sep – 15 Oct 2026",v:"Royal Opera House",ar:"Covent Garden",co:"From £50",d:"Kasper Holten's production of Mozart's dark dramma giocoso, with Aigul Akhmetshina as Donna Elvira.",i:80,iw:"Western classical opera — a flagship Covent Garden staging.",a:35,as:"Not yet reviewed — new run",af:"unreviewed",b:[],u:"https://www.rbo.org.uk/production/don-giovanni-kasper-holten"},
+ {t:"Kabuki Winterreise: Spring Snow",c:"Music",cc:true,g:"Western classical",st:"2026-10-11",en:"2026-10-11",dl:"Sun 11 Oct 2026",v:"Wigmore Hall",ar:"Marylebone",co:"≈£20–£45",d:"Fleur Barron, Julius Drake and dancer Suleiman Suleiman interweave Schubert's Winterreise with Japanese kabuki.",i:88,iw:"Western classical song meets Japanese dance-drama — exactly a 'vista'.",a:35,as:"Not yet reviewed — distinctive cross-cultural staging",af:"unreviewed",b:["One night"],u:"https://www.wigmore-hall.org.uk/whats-on/series/202627-season-september-december"},
+ {t:"Parsifal (Wagner) — The Royal Opera",c:"Music",cc:false,g:"Opera",st:"2026-10-01",en:"2026-10-17",dl:"1–17 Oct 2026",v:"Royal Opera House",ar:"Covent Garden",co:"Returns only",d:"A new staging of Wagner's final sacred music-drama under Jakub Hrůša, with Christian Gerhaher as Amfortas.",i:80,iw:"Western classical — a major new Wagner production.",a:35,as:"Not yet reviewed — sold out, returns only",af:"unreviewed",b:["Sold out"],u:"https://www.rbo.org.uk/production/parsifal-evgeny-titov"},
+ {t:"Last Night of the BBC Proms 2026",c:"Music",cc:false,g:"Western classical",st:"2026-09-12",en:"2026-09-12",dl:"Sat 12 Sep 2026",v:"Royal Albert Hall",ar:"South Kensington",co:"From £8 (Promming) – £186",d:"Sakari Oramo conducts the traditional grand finale, with pianist Yuja Wang and tenor Nicky Spence.",i:80,iw:"Western classical — the celebrated climax of the Proms.",a:35,as:"Not yet reviewed — Proms finale",af:"unreviewed",b:["One night"],u:"https://www.royalalberthall.com/tickets/proms/bbc-proms-2026"},
+ {t:"Korea",c:"Art",cc:true,g:null,st:"2026-10-01",en:"2027-01-31",dl:"1 Oct 2026 – 31 Jan 2027",v:"British Museum",ar:"Bloomsbury",co:"Ticketed",d:"A survey of Korean art from the Bronze Age to the 20th century, with international loans.",i:86,iw:"Art and history of Korea — cross-cultural.",a:35,as:"Not yet reviewed — opens October",af:"unreviewed",b:[],u:"https://www.britishmuseum.org/exhibitions-events"},
+ {t:"Salman Toor: Someone Like You",c:"Art",cc:true,g:null,st:"2026-10-02",en:"2027-01-24",dl:"from 2 Oct 2026",v:"The Courtauld Gallery",ar:"Strand",co:"Ticketed",d:"First European solo show of the Pakistani-born painter, whose intimate scenes explore queer South Asian diaspora life.",i:86,iw:"Art and politics of queer diaspora — cross-cultural, a first European show.",a:35,as:"Not yet reviewed — opens October",af:"unreviewed",b:["First in Europe"],u:"https://courtauld.ac.uk/whats-on/"},
+ {t:"Light and Magic: The Birth of Art Photography",c:"Art",cc:true,g:null,st:"2026-10-08",en:"2027-02-14",dl:"8 Oct 2026 – 14 Feb 2027",v:"Tate Modern",ar:"Bankside",co:"Ticketed",d:"The international Pictorialist movement, with photographers from Shanghai, Sydney, Cape Town, Brazil and Singapore.",i:86,iw:"Art and history of photography across the globe — cross-cultural.",a:35,as:"Not yet reviewed — opens October",af:"unreviewed",b:[],u:"https://www.tate.org.uk/whats-on"},
+ {t:"The 90s",c:"Art",cc:false,g:null,st:"2026-10-01",en:"2027-02-14",dl:"1 Oct 2026 – 14 Feb 2027",v:"Tate Britain",ar:"Millbank",co:"Ticketed",d:"Edward Enninful curates a survey of 1990s British art, design and pop culture — the YBAs, Britpop and after.",i:88,iw:"Art, design and recent cultural history in one.",a:35,as:"Not yet reviewed — opens October",af:"unreviewed",b:[],u:"https://www.tate.org.uk/whats-on/tate-britain"},
+ {t:"An Evening with Nick Park",c:"Science",cc:false,g:null,st:"2026-10-14",en:"2026-10-14",dl:"Wed 14 Oct 2026",v:"Barbican Centre",ar:"Barbican / City",co:"Ticketed",d:"The Oscar-winning creator of Wallace & Gromit on his craft and the art of stop-motion.",i:80,iw:"Art and design of animation — from a multi-Oscar master.",a:76,as:"Barbican — talks programme (acclaimed guest)",af:null,b:[],u:"https://www.barbican.org.uk/whats-on/talks-events"},
+ {t:"Francis Crick Prize Lecture: Pathogens and the power of evolution",c:"Science",cc:false,g:null,st:"2026-10-14",en:"2026-10-14",dl:"Wed 14 Oct 2026",v:"The Royal Society",ar:"St James's",co:"Free",d:"The Royal Society's annual prize lecture, on how evolution shapes pathogens and infectious disease.",i:68,iw:"Front-line science from the national academy — and free.",a:86,as:"Royal Society — flagship prize lecture",af:null,b:[],u:"https://royalsociety.org/science-events-and-lectures/public/"},
+ {t:"Sense and Sensibility (2026)",c:"Film",cc:false,g:null,st:"2026-09-25",en:"2026-10-17",dl:"from 25 Sep 2026",v:"UK cinemas (Curzon / Odeon)",ar:"Greater London",co:"≈£10–£16",d:"A new, rawer adaptation of the Jane Austen novel, starring Daisy Edgar-Jones.",i:80,iw:"Art and period history — a fresh take on Austen.",a:35,as:"Not yet reviewed — brand-new release",af:"unreviewed",b:[],u:"https://www.screendaily.com/news/uk-ireland-film-cinema-release-dates-latest-updates-for-2026/5211864.article"}
+];
+
+const CATS = ["All","Art","Science","Film","Theatre","Music","Literature"];
+let cat="All", sort="fit", wA=0.60, view="all";
+
+// --- Bookmarks: per-device, kept in the browser (localStorage), keyed by event title ---
+EV.forEach((e,i)=>e._id=i);
+const BM_KEY="lv_bookmarks";
+let saved=new Set();
+try{saved=new Set(JSON.parse(localStorage.getItem(BM_KEY)||"[]"))}catch(e){}
+const saveBM=()=>{try{localStorage.setItem(BM_KEY,JSON.stringify([...saved]))}catch(e){}};
+
+// --- "New this week": diff current titles against last week's stored snapshot ---
+const WEEK=TODAY.getFullYear()+"-"+String(TODAY.getMonth()+1).padStart(2,"0")+"-"+String(TODAY.getDate()).padStart(2,"0");
+let _prev=new Set(EV.map(e=>e.t)); // baseline: nothing new until we have real history
+(function(){
+  const titles=EV.map(e=>e.t), SNAP="lv_snapshot";
+  let snap=null;try{snap=JSON.parse(localStorage.getItem(SNAP)||"null")}catch(e){}
+  const put=o=>{try{localStorage.setItem(SNAP,JSON.stringify(o))}catch(e){}};
+  if(!snap){ _prev=new Set(titles); put({week:WEEK,titles,prevTitles:titles}); }        // first visit ever
+  else if(snap.week===WEEK){ _prev=new Set(snap.prevTitles||[]); }                        // same week, keep baseline
+  else { _prev=new Set(snap.titles||[]); put({week:WEEK,titles,prevTitles:snap.titles||[]}); } // week rolled over
+})();
+const isNew=t=>!_prev.has(t);
+
+// Acclaim = 50 standard host-prestige stand-in; +10 for a good external review / canonical status.
+const GOOD = new Set([
+  "James McNeill Whistler","Anish Kapoor","Julio Le Parc: Light. Colour. Action.",
+  "Rising Voices: Contemporary Art from Asia, Australia and the Pacific",
+  "Japanese Women Photographers","M.C. Escher: The Exhibition","The Coming of Age",
+  "The Oresteia","Much Ado About Nothing","Barbican Outdoor Cinema 2026",
+  "The Human Condition Trilogy (Masaki Kobayashi)","Bullets and Brotherhood: The Films of John Woo",
+  "Wong Kar Wai (retrospective)","David Lynch Forever","Hong Kong Golden Age 1985–1997",
+  "John Akomfrah (retrospective)","Peter Watkins (retrospective)","Billy Wilder (retrospective)",
+  "Claude Chabrol — Elements of Crime","Aqua-Cinema: L'Atalante + Painlevé shorts"
+]);
+const AC = ev => GOOD.has(ev.t) ? 60 : 50;
+
+// Verified deep links to the specific event page (overrides the generic listing url in the data).
+const LINK = {
+  "First Night of the BBC Proms 2026: An American Celebration":"https://www.royalalberthall.com/tickets/proms/bbc-proms-2026/first-night-of-the-proms-2026",
+  "Prom: Beethoven's Ninth Symphony":"https://www.royalalberthall.com/tickets/proms/bbc-proms-2026/beethovens-ninth",
+  "Prom: Met Orchestra with Joyce DiDonato — Mahler & Saariaho":"https://www.royalalberthall.com/tickets/proms/bbc-proms-2026/the-met-orchestra-plays-mahler",
+  "Prom: Berlin Philharmonic & Kirill Petrenko":"https://www.royalalberthall.com/tickets/proms/bbc-proms-2026/berlin-philharmonic-plays-elgar-and-tchaikovsky",
+  "Prom: Martha Argerich plays Beethoven":"https://www.royalalberthall.com/tickets/proms/bbc-proms-2026/martha-argerich-plays-beethoven",
+  "Last Night of the BBC Proms 2026":"https://www.royalalberthall.com/tickets/proms/bbc-proms-2026/last-night-of-the-proms-2026",
+  "Groundings on a Black Planet":"https://www.barbican.org.uk/whats-on/2026/event/groundings-on-a-black-planet",
+  "Creating Pan-African Cinema":"https://www.barbican.org.uk/whats-on/2026/event/creating-pan-african-cinema",
+  "Deconstructing Utopia: an evening of dialogue":"https://www.barbican.org.uk/whats-on/2026/event/deconstructing-utopia-an-evening-of-dialogue",
+  "Lawrence Abu Hamdan: The Crack and the Boom":"https://www.barbican.org.uk/whats-on/2026/event/lawrence-abu-hamdan-the-crack-and-the-boom",
+  "An Evening with Nick Park":"https://www.barbican.org.uk/whats-on/2026/event/an-evening-with-nick-park",
+  "The Human Condition Trilogy (Masaki Kobayashi)":"https://www.google.com/search?q=The+Human+Condition+Trilogy+Prince+Charles+Cinema",
+  "Wong Kar Wai (retrospective)":"https://www.google.com/search?q=Wong+Kar+Wai+season+Prince+Charles+Cinema",
+  "David Lynch Forever":"https://www.google.com/search?q=David+Lynch+Forever+Prince+Charles+Cinema",
+  "Bullets and Brotherhood: The Films of John Woo":"https://whatson.bfi.org.uk/Online/article/john-woo",
+  "John Akomfrah (retrospective)":"https://www.google.com/search?q=John+Akomfrah+season+BFI+Southbank",
+  "Peter Watkins (retrospective)":"https://whatson.bfi.org.uk/Online/article/peter-watkins",
+  "Billy Wilder (retrospective)":"https://www.google.com/search?q=Billy+Wilder+season+BFI+Southbank",
+  "Claude Chabrol — Elements of Crime":"https://www.bfi.org.uk/news/claude-chabrol-celebration",
+  "The Coming of Age":"https://wellcomecollection.org/exhibitions/the-coming-of-age",
+  "Tracing My History":"https://wellcomecollection.org/events/tracing-my-history",
+  "NIGO: From Japan with Love":"https://designmuseum.org/exhibitions/nigo-from-japan-with-love",
+  "Korea":"https://www.britishmuseum.org/exhibitions/korea",
+  "George Clinton: Afrofuturism":"https://www.timeout.com/london/things-to-do/george-clinton",
+  "Salman Toor: Someone Like You":"https://courtauld.ac.uk/whats-on/exh-salman-toor-someone-like-you/",
+  "Japanese Women Photographers":"https://thephotographersgallery.org.uk/whats-on/japanese-women-photographers-1950s-now",
+  "Gabriel Chaile: Archaeology of Memory":"https://www.whitechapelgallery.org/exhibitions/gabriel-chaile/",
+  "Víkingur Ólafsson: Bach, Beethoven & Schubert":"https://www.wigmore-hall.org.uk/whats-on/202609101930",
+  "Kabuki Winterreise: Spring Snow":"https://www.wigmore-hall.org.uk/whats-on/202610111930",
+  "Jahnavi Harrison":"https://dice.fm/event/bbok6o-jahnavi-harrison-22nd-aug-union-chapel-london-tickets",
+  "Warsaw Jazz Takeover: Masecki · HVMBLE · Warsaw Village Band":"https://www.google.com/search?q=Warsaw+Jazz+Takeover+Union+Chapel+13+September+2026",
+  "Summer Scholars: Empire, Latin America & Indigenous Voices":"https://www.google.com/search?q=Summer+Scholars+British+Library+2026",
+  "PEN Pinter Prize 2026: Jacqueline Rose":"https://events.bl.uk/events/pen-pinter-prize-2026-jacqueline-rose",
+  "Edna Bonhomme & Lola Olufemi: Tending to Our Wounds":"https://www.eventbrite.co.uk/e/edna-bonhomme-lola-olufemi-tending-to-our-wounds-tickets-1988101787966",
+  "Denise Riley & Emily Berry: A Chorus of Ears":"https://www.eventbrite.co.uk/e/denise-riley-emily-berry-a-chorus-of-ears-tickets-1987078068995",
+  "Francis Crick Prize Lecture: Pathogens and the power of evolution":"https://royalsociety.org/science-events-and-lectures/2026/10/francis-crick-prize-lecture/",
+  "Jeanette Winterson: Creativity, Artists, Us":"https://www.google.com/search?q=Jeanette+Winterson+Creativity+Artists+Us+Southbank+Centre",
+  "Unveiling Vermeer: Andrew Graham-Dixon":"https://www.eventbrite.co.uk/e/unveiling-vermeer-the-man-and-his-masterpieces-with-andrew-graham-dixon-tickets-1987609338035",
+  "Sense and Sensibility (2026)":"https://www.focusfeaturesfilms.co.uk/films/sense-and-sensibility/"
+};
+
+const $=s=>document.querySelector(s);
+const listEl=$("#list"), gemsEl=$("#gems");
+
+// chips
+$("#chips").innerHTML=CATS.map(c=>`<button class="chip" data-c="${c}" aria-pressed="${c==='All'}">${c}</button>`).join("");
+$("#chips").addEventListener("click",e=>{const b=e.target.closest(".chip");if(!b)return;
+  cat=b.dataset.c;[...$("#chips").children].forEach(x=>x.setAttribute("aria-pressed",x.dataset.c===cat));render();});
+
+$("#sortDate").addEventListener("click",()=>setSort("date"));
+$("#sortFit").addEventListener("click",()=>setSort("fit"));
+function setSort(s){sort=s;$("#sortDate").setAttribute("aria-pressed",s==="date");
+  $("#sortFit").setAttribute("aria-pressed",s==="fit");render();}
+
+$("#viewAll").addEventListener("click",()=>setView("all"));
+$("#viewSaved").addEventListener("click",()=>setView("saved"));
+function setView(v){view=v;$("#viewAll").setAttribute("aria-pressed",v==="all");
+  $("#viewSaved").setAttribute("aria-pressed",v==="saved");render();}
+function updateSavedCount(){const el=$("#savedCount");if(el)el.textContent=saved.size?"· "+saved.size:"";}
+
+// Toggle a bookmark when its star is clicked (event-delegated so it survives re-renders)
+listEl.addEventListener("click",e=>{
+  const btn=e.target.closest(".star");if(!btn)return;
+  const t=EV[+btn.dataset.id].t, on=!saved.has(t);
+  on?saved.add(t):saved.delete(t);saveBM();updateSavedCount();
+  btn.setAttribute("aria-pressed",on);btn.title=on?"Saved":"Save";
+  btn.setAttribute("aria-label",on?"Remove bookmark":"Bookmark this");
+  const g=btn.querySelector("span");if(g)g.textContent=on?"★":"☆";
+  if(view==="saved"&&!on)render(); // unstarred while viewing saved — drop it from the list
+});
+
+$("#slider").addEventListener("input",e=>{wA=(+e.target.value)/100;
+  const pI=Math.round((1-wA)*100),pA=Math.round(wA*100);
+  $("#wI").textContent=pI+"%";$("#wA").textContent=pA+"%";
+  $("#fI").textContent=pI+"%";$("#fA").textContent=pA+"%";render();});
+
+const fit=ev=>Math.round((1-wA)*ev.i + wA*AC(ev));
+const closingSoon=ev=>{const e=new Date(ev.en+"T00:00:00");const d=(e-TODAY)/DAY;return d>=0&&d<=21;};
+const onNow=ev=>{const s=new Date(ev.st+"T00:00:00");return s<=TODAY;};
+const sortDate=ev=>{const s=new Date(ev.st+"T00:00:00");return s<TODAY?TODAY:s;};
+const MONTHS=["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"];
+const monthKey=ev=>{const d=sortDate(ev);return d.getFullYear()+"-"+d.getMonth();};
+const monthName=ev=>{const d=sortDate(ev);return (d<=TODAY?"On now · ":"")+MONTHS[d.getMonth()]+" "+d.getFullYear();};
+
+function badges(ev){
+  const out=[];
+  if(ev.cc) out.push(['cc','Cross-cultural']);
+  if(/free/i.test(ev.co)) out.push(['free','Free']);
+  if(closingSoon(ev)) out.push(['close','Closing soon']);
+  (ev.b||[]).forEach(x=>{
+    const cls=/premiere|first/i.test(x)?'prem':(/sold out/i.test(x)?'':'');
+    out.push([cls,x]);
+  });
+  return out;
+}
+
+function card(ev){
+  const av=AC(ev), f=fit(ev), iContrib=(1-wA)*ev.i, aContrib=wA*av, tot=iContrib+aContrib||1;
+  const fc=f>=68?'hi':(f<58?'lo':'');
+  const nt=isNew(ev.t)?`<span class="tag new">New this week</span>`:"";
+  const tags=nt+[['cat',ev.c],...(ev.g?[['','· '+ev.g]]:[]),...badges(ev)]
+    .map(([c,l])=>`<span class="tag ${c}">${l}</span>`).join("");
+  const acc=ev.af?`<span class="acc flag">⚠ ${ev.as}</span>`:`<span class="acc">${ev.as}</span>`;
+  const on=saved.has(ev.t);
+  const star=`<button class="star" type="button" data-id="${ev._id}" aria-pressed="${on}" title="${on?'Saved':'Save'}" aria-label="${on?'Remove bookmark':'Bookmark this'}"><span aria-hidden="true">${on?'★':'☆'}</span></button>`;
+  return `<article class="card">
+    ${star}
+    <div class="score">
+      <div>
+        <div class="fit ${fc}">${f}</div>
+        <div class="fitlabel">fit / 100</div>
+      </div>
+      <div>
+        <div class="splitbar" title="Interest ${ev.i} · Acclaim ${av}">
+          <i class="si" style="width:${Math.round(iContrib/tot*100)}%"></i>
+          <i class="sa" style="width:${Math.round(aContrib/tot*100)}%"></i>
+        </div>
+        <div class="split">int ${ev.i} · acc ${av}</div>
+      </div>
+    </div>
+    <div class="body">
+      <h3>${ev.t}</h3>
+      <div class="tags">${tags}</div>
+      <p class="meta">${ev.dl}<span class="dot">·</span>${ev.v}, ${ev.ar}<span class="dot">·</span><span class="cost">${ev.co}</span></p>
+      <p class="desc">${ev.d}</p>
+      <p class="why"><b>Why it fits:</b> ${ev.iw}</p>
+      <div class="foot">${acc}<a class="book" href="${LINK[ev.t]||ev.u}" target="_blank" rel="noopener">Details ↗</a></div>
+    </div>
+  </article>`;
+}
+
+function render(){
+  const savedView=view==="saved";
+  $("#listTitle").textContent=savedView?"Your bookmarks":(sort==="date"?"The week ahead, by date":"Ranked by fit");
+
+  let evs=EV.filter(e=>cat==="All"||e.c===cat);
+  if(savedView)evs=evs.filter(e=>saved.has(e.t));
+  // gems: strong fit, unreviewed/limited — a discovery rail, shown only in the full view
+  const gems=savedView?[]:EV.filter(e=>(e.af==="unreviewed"||e.af==="limited")&&e.i>=84&&(cat==="All"||e.c===cat))
+    .sort((a,b)=>b.i-a.i||fit(b)-fit(a)).slice(0,12);
+  $("#gemsSec").style.display=gems.length?"":"none";
+  gemsEl.innerHTML=gems.map(e=>`<div class="gem">
+      <div class="gscore">${fit(e)}<span style="font-size:12px;color:var(--ink-faint)"> fit</span></div>
+      <h4>${e.t}</h4>
+      <div class="meta">${e.dl} · ${e.v}</div>
+      <div class="why">${e.iw}</div>
+    </div>`).join("");
+
+  if(sort==="fit") evs.sort((a,b)=>fit(b)-fit(a)||sortDate(a)-sortDate(b));
+  else evs.sort((a,b)=>sortDate(a)-sortDate(b)||fit(b)-fit(a));
+
+  $("#count").textContent=evs.length+" event"+(evs.length!==1?"s":"");
+  if(!evs.length){listEl.innerHTML=`<div class="empty">${savedView?"Nothing saved yet — tap the ☆ on any card to bookmark it.":"Nothing in this category this week."}</div>`;return;}
+
+  let html="", lastM=null;
+  evs.forEach(e=>{
+    if(sort==="date"){const m=monthKey(e);if(m!==lastM){html+=`<div class="monthdiv">${monthName(e)}</div>`;lastM=m;}}
+    html+=card(e);
+  });
+  listEl.innerHTML=html;
+}
+updateSavedCount();
+render();
+</script>
