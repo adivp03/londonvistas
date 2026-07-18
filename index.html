@@ -412,10 +412,19 @@ listEl.addEventListener("click",e=>{
   if(view==="saved"&&!on)render(); // unstarred while viewing saved — drop it from the list
 });
 
-$("#slider").addEventListener("input",e=>{wA=(+e.target.value)/100;
+// Interest/Acclaim weight — persisted per-device (localStorage key "lv_weight")
+function applyWeight(v,doRender){
+  wA=(+v)/100;
   const pI=Math.round((1-wA)*100),pA=Math.round(wA*100);
+  $("#slider").value=v;
   $("#wI").textContent=pI+"%";$("#wA").textContent=pA+"%";
-  $("#fI").textContent=pI+"%";$("#fA").textContent=pA+"%";render();});
+  $("#fI").textContent=pI+"%";$("#fA").textContent=pA+"%";
+  try{localStorage.setItem("lv_weight",v)}catch(e){}
+  if(doRender)render();
+}
+$("#slider").addEventListener("input",e=>applyWeight(e.target.value,true));
+(function(){let w=null;try{w=localStorage.getItem("lv_weight")}catch(e){}
+  if(w!==null&&w!=="")applyWeight(w,false);})();
 
 const fit=ev=>Math.round((1-wA)*ev.i + wA*AC(ev));
 const closingSoon=ev=>{const e=new Date(ev.en+"T00:00:00");const d=(e-TODAY)/DAY;return d>=0&&d<=21;};
