@@ -393,7 +393,11 @@ $("#chips").addEventListener("click",e=>{const b=e.target.closest(".chip");if(!b
 $("#sortDate").addEventListener("click",()=>setSort("date"));
 $("#sortFit").addEventListener("click",()=>setSort("fit"));
 function setSort(s){sort=s;$("#sortDate").setAttribute("aria-pressed",s==="date");
-  $("#sortFit").setAttribute("aria-pressed",s==="fit");render();}
+  $("#sortFit").setAttribute("aria-pressed",s==="fit");
+  try{localStorage.setItem("lv_sort",s)}catch(e){}render();}
+// restore saved sort choice (state only — the initial render() below applies it)
+(function(){let s=null;try{s=localStorage.getItem("lv_sort")}catch(e){}
+  if(s==="date"||s==="fit"){sort=s;$("#sortDate").setAttribute("aria-pressed",s==="date");$("#sortFit").setAttribute("aria-pressed",s==="fit");}})();
 
 $("#viewAll").addEventListener("click",()=>setView("all"));
 $("#viewSaved").addEventListener("click",()=>setView("saved"));
